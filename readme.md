@@ -1,4 +1,4 @@
-# Clover Hotel's API Documentation 
+# Clover's API Documentation 
 
 ## Table of Contents
 - [Authentication](#authentication)

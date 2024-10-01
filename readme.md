@@ -26,6 +26,8 @@
   - [Get Chat Types](#get-chat-types)
   - [Get Chat Messages by Chat Type](#get-chat-messages-by-chat-type)
   - [Send Chat Message](#send-chat-message)
+- [Notifications](#notifications)
+  - [Get Notifications](#get-notifications)
 - [Delete Account](#delete-account)
 
 
@@ -490,6 +492,29 @@ Retrieve the authenticated customer's point history.
                 "created_at": "2023-09-12 10:30:00"
             }, ...
         ]
+    ]
+}
+```
+## Notifications
+### Get Notifications
+#### URL
+`GET /api/notifications`
+#### Description
+Retrieve the authenticated customer's notifications.
+#### Headers
+- `Authorization`: Bearer Token
+#### Response
+```json
+{
+    "success": true,
+    "message": "Notifications retrieved successfully",
+    "data": [
+        {
+            "id": 1,
+            "title": "Welcome to our hotel!",
+            "body": "Thank you for choosing our hotel.!",
+        },
+        ...
     ]
 }
 ```

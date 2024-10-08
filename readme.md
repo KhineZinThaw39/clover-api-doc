@@ -183,7 +183,7 @@ Retrieve a list of all hotels.
             "name_mm": "Hotel A",
             "name_en": "Hotel A",
             "address": "123 Main St",
-            "phone_numbers": "[123-456-7890, 987-654-3210]",
+            "phone_numbers": "123-456-7890, 987-654-3210",
             "feature_image": {
                 "id": 1,
                 "url": "img_url",
@@ -213,7 +213,7 @@ Retrieve details of a specific hotel.
         "name_mm": "Hotel A",
         "name_en": "Hotel A",
         "address": "123 Main St",
-        "phone_numbers": "[123-456-7890, 987-654-3210]",
+        "phone_numbers": "123-456-7890, 987-654-3210",
         "feature_image": {
             "id": 1,
             "url": "img_url",

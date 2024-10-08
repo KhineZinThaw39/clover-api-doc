@@ -180,8 +180,7 @@ Retrieve a list of all hotels.
     "data": [
         {
             "id": 1,
-            "name_mm": "Hotel A",
-            "name_en": "Hotel A",
+            "name": "Hotel A",
             "address": "123 Main St",
             "phone_numbers": "123-456-7890, 987-654-3210",
             "feature_image": {
@@ -210,8 +209,7 @@ Retrieve details of a specific hotel.
     "message": "Hotel details retrieved successfully",
     "data": {
         "id": 1,
-        "name_mm": "Hotel A",
-        "name_en": "Hotel A",
+        "name": "Hotel A",
         "address": "123 Main St",
         "phone_numbers": "123-456-7890, 987-654-3210",
         "feature_image": {

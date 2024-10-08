@@ -243,7 +243,11 @@ Retrieve a list of rooms for a specific hotel.
             "name_mm": "Room A",
             "name_en": "Room A",
             "size": 200 ft,
-            "view_type": "Sea View",
+            "view_type": {
+              "id": 1,
+              "name_mm": "Sea View",
+              "name_en": "Sea View"
+            },
             "bed_type": "King",
             "feature_image": {
                 "id": 1,
@@ -269,9 +273,17 @@ Retrieve details of a specific room.
         "name_en": "Room A",
         "hotel_name": "Hotel A",
         "size": 200 ft,
-        "view_type": "Sea View",
+         "view_type": {
+            "id": 1,
+            "name_mm": "Sea View",
+            "name_en": "Sea View"
+        },
         "bed_type": "King",
-        "room_type": "Deluxe",
+        "room_type": {
+            "id": 1,
+            "name_mm": "Deluxe",
+            "name_en": "Deluxe"
+        },
         "description_mm": "Text",
         "description_en": "Text",
         "is_smoking": true,

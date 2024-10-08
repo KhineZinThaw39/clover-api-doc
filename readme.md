@@ -4,6 +4,7 @@
 - [Authentication](#authentication)
   - [Login](#login)
   - [Register](#register)
+  - [Logout](#logout)
 - [Home Page](#home-page)
 - [Hotels](#hotels)
   - [Get All Hotels](#get-all-hotels)
@@ -44,6 +45,7 @@ Authenticate a customer and return a Bear token.
 #### Request Parameters
 - `user_id`: (string) User's email address. (required)
 - `password`: (string) User's password. (required)
+- `fcm_token`: (string) User's FCM token. (required)
 
 #### Show Validation Errors
 ```json
@@ -80,6 +82,7 @@ Register a new customer.
 - `password`: (string) User's password. (required)
 - `password_confirmation`: (string) Confirmation of the password. (required)
 - `nrc`: (string) User's NRC number. (optional)
+- `fcm_token`: (string) User's FCM token. (required)
 
 #### Show Validation Errors
 ```json
@@ -102,6 +105,20 @@ Register a new customer.
   "success": true,
   "message": "Registration successful",
   "token": "your_bearer_token"
+}
+```
+### Logout
+#### URL
+`POST /api/logout`
+#### Description
+Logout the authenticated customer.
+#### Headers
+- `Authorization`: Bearer Token
+#### Response
+```json
+{
+    "success": true,
+    "message": "Logout successful",
 }
 ```
 

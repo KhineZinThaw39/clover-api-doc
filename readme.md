@@ -386,7 +386,11 @@ Retrieve details of a specific booking.
             "id": 1,
             "name_mm": "Room A",
             "name_en": "Room A",
-            "room_type": "Deluxe",
+            "room_type": {
+                "id" : 1,
+                "name_en" : "Delux",
+                "name_mm" : "Delux",
+            }
         },
         "check_in_date": "2023-09-12",
         "check_out_date": "2023-09-15",

@@ -379,8 +379,7 @@ Retrieve details of a specific booking.
         "created_at": "2023-09-12 10:30:00",
         "hotel": {
             "id": 1,
-            "name_mm": "Hotel A",
-            "name_en": "Hotel A",
+            "name": "Hotel A",
         },
         "room": {
             "id": 1,

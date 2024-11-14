@@ -12,6 +12,7 @@
 - [Rooms](#rooms)
   - [Get Rooms by Hotel](#get-rooms-by-hotel)
   - [Get Room Details](#get-room-details)
+  - [Room Filter](#room-filter)
 - [Bookings](#bookings)
   - [Create Booking](#create-booking)
   - [Get Bookings](#get-bookings)
@@ -24,9 +25,14 @@
 - [Point History](#point-history)
   - [Get Point History](#get-point-history)
 - [Chat](#chat)
-  - [Get Chat Types](#get-chat-types)
-  - [Get Chat Messages by Chat Type](#get-chat-messages-by-chat-type)
+  - [Get Chat Questions](#get-chat-questions)
+  - [Get Chat Messages List](#get-chat-messages-list)
+  - [Start Chat](#start-chat)
   - [Send Chat Message](#send-chat-message)
+  - [Send Image](#send-image)
+  - [Send Multiple Image](#send-multiple-image)
+  - [Send Voice](#send-voice)
+  - [Read Message](#read-message)
 - [Notifications](#notifications)
   - [Get Notifications](#get-notifications)
 - [Delete Account](#delete-account)
@@ -257,6 +263,7 @@ Retrieve a list of rooms for a specific hotel.
     ]
 }
 ```
+
 ### Get Room Details
 #### URL
 `GET /api/rooms/{room_id}`
@@ -309,6 +316,74 @@ Retrieve details of a specific room.
     }
 }
 ```
+
+## Rooms
+### Room Filter
+#### URL
+`POST /api/filter`
+#### Description
+Retrieve a list of rooms by filter.
+#### Request Parameters
+- `hotel_id`: (integer) ID of the hotel. (required)
+- `room_type_id`: (integer) ID of the room.
+- `from_date`: (date) Check-in date. (required)
+- `to_date`: (date) Check-out date.
+#### Response
+```json
+{
+    "success": true,
+    "message": "Rooms retrieved successfully",
+    "data": {
+        "rooms": [
+            {
+                "id": 1,
+                "name_mm": "Ashely Gilmore",
+                "name_en": "Larissa Horton",
+                "size": "60 ft",
+                "view_type": {
+                    "id": 1,
+                    "name_mm": "Ava Weaver",
+                    "name_en": "Hermione Hardin"
+                },
+                "bed_type": "Quisquam dolor cillu",
+                "feature_image": {
+                    "id": 4,
+                    "url": "http://clover-hotel.test/storage/4/71rE1fTEeDL._SL1500_.jpg"
+                }
+            }
+        ],
+        "all_hotels": [
+            {
+                "id": 1,
+                "name": "Xanthus Tucker",
+                "address": "Consequuntur exercit",
+                "phone_numbers": "+1 (128) 887-1586",
+                "feature_image": {
+                    "id": 1,
+                    "url": "aaa.jpg"
+                },
+                "images": [
+                    {
+                        "id": 2,
+                        "url": "aaa.jpg"
+                    },
+                ]
+            }
+        ],
+        "hotel": {
+            "id": 1,
+            "hotel_admin_id": 2,
+            "hotel_assistant_id": 3,
+            "name": "Xanthus Tucker",
+            "address": "Consequuntur exercit",
+            "phone_numbers": "+1 (128) 887-1586",
+            "created_at": "2024-11-11T07:18:27.000000Z",
+            "updated_at": "2024-11-11T07:18:27.000000Z"
+        }
+    }
+}
+```
+
 ## Bookings
 ### Create Booking
 #### URL
@@ -338,6 +413,7 @@ Create a new booking.
     }
 }
 ```
+
 ### Get Bookings
 #### URL
 `GET /api/bookings`
@@ -550,74 +626,184 @@ Retrieve the authenticated customer's notifications.
 ```
 
 ## Chat
-### Get Chat Types
+### Get Chat Questions
 #### URL
-`GET /api/chat-types`
+`GET /api/chat-questions`
 #### Description
-Retrieve the authenticated customer's chat types.
+Retrieve the authenticated customer's chat questions.
 #### Headers
 - `Authorization`: Bearer Token
 #### Response
 ```json
 {
-    "success": true,
-    "message": "Chat types retrieved successfully",
+    {
     "data": [
         {
             "id": 1,
-            "title_en": "How to take reservation?",
-            "title_mm": "How to take reservation?",
-        }, ...
+            "question": "How to take reservation?"
+        },
+        {
+            "id": 2,
+            "question": "How to contact us?"
+        },
+        {
+            "id": 3,
+            "question": "What service do you serve?"
+        }
     ]
 }
+}
 ```
-### Get Chat Messages by Chat Type
+### Get Chat Messages List
 #### URL
-`GET /api/chat-messages/{chat_type_id}`
+`GET /api/chats/{hotel_id}`
 #### Description
-Retrieve the authenticated customer's chat messages by hotel and chat type.
+Retrieve the authenticated customer's chat messages by hotel.
 #### Headers
 - `Authorization`: Bearer Token
 #### Response
 ```json
 {
     "success": true,
-    "message": "Chat messages retrieved successfully",
+    "message": "Chats fetched successfully.",
     "data": [
         {
-            "id": 1,
-            "message": "Hello, how can I help you?",
-            "created_at": "2023-09-12 10:30:00",
-            "customer": {
-                "id": 1,
-                "name": "John Doe",
-                "image": "img_url",
-            },
-            "hotel": {
-                "id": 1,
-                "name": "Hotel A",
-            },
-        }, ...
+            "hotel_id": "1",
+            "admin_id": 1,
+            "customer_id": null,
+            "is_read": true,
+            "message": "How can I help you?",
+            "imageUrl": "",
+            "audioUrl": "",
+            "timestamp": "2024-11-13T07:58:03.716640Z"
+        },
+        {
+            "hotel_id": "1",
+            "admin_id": null,
+            "customer_id": 1,
+            "is_read": true,
+            "message": "",
+            "imageUrl": "{{ imageURL }}",
+            "audioUrl": "",
+            "timestamp": "2024-11-13T08:08:42.289242Z"
+        },
+        {
+            "hotel_id": "1",
+            "admin_id": null,
+            "customer_id": 1,
+            "is_read": true,
+            "message": "",
+            "imageUrl": "",
+            "audioUrl": "{{ audioUrl }}",
+            "timestamp": "2024-11-13T08:09:13.863783Z"
+        },
+        ...
     ]
 }
 ```
 
+### Start Chat
+#### URL
+`POST /api/start-chat`
+#### Description
+Start chat message to the hotel.
+#### Headers
+- `Authorization`: Bearer Token
+#### Request Parameters
+- `hotel_id`: (integer) Hotel ID.
+#### Response
+```json
+{
+    "success": true,
+    "message": "Start Chat successfully."
+}
+```
+
+
 ### Send Chat Message
 #### URL
-`POST /api/chat-messages`
+`POST /api/send-message`
 #### Description
 Send a chat message to the hotel.
 #### Headers
 - `Authorization`: Bearer Token
 #### Request Parameters
 - `hotel_id`: (integer) Hotel ID.
-- `chat_type_id`: (integer) Chat type ID.
 - `message`: (string) Chat message.
 #### Response
 ```json
 {
     "success": true,
-    "message": "Chat message sent successfully",
+    "message": "Message sent successfully."
+}
+```
+
+### Send Image
+#### URL
+`POST /api/send-image`
+#### Description
+Send a chat image to the hotel.
+#### Headers
+- `Authorization`: Bearer Token
+#### Request Parameters
+- `hotel_id`: (integer) Hotel ID.
+- `image`: (file) Image file.
+#### Response
+```json
+{
+    "success": true,
+    "message": "Image sent successfully."
+}
+```
+
+### Send Multiple Image
+#### URL
+`POST /api/send-multiple-image`
+#### Description
+Send a multiple image to the hotel.
+#### Headers
+- `Authorization`: Bearer Token
+#### Request Parameters
+- `hotel_id`: (integer) Hotel ID.
+- `images`: (array) Image file array.
+#### Response
+```json
+{
+    "success": true,
+    "message": "Images sent successfully."
+}
+```
+
+### Send Voice
+#### URL
+`POST /api/send-voice`
+#### Description
+Send a multiple image to the hotel.
+#### Headers
+- `Authorization`: Bearer Token
+#### Request Parameters
+- `hotel_id`: (integer) Hotel ID.
+- `voice`: (file) Voice file.
+#### Response
+```json
+{
+    "success": true,
+    "message": "Voice sent successfully."
+}
+```
+
+### Read Message
+#### URL
+`POST /api/read-message/{hotel_id}`
+#### Description
+Read message for hotel chat.
+#### Headers
+- `Authorization`: Bearer Token
+#### Response
+```json
+{
+    "success": true,
+    "message": "Read message successfully."
 }
 ```
 
